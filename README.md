@@ -83,11 +83,11 @@ genvm-lint check contracts/trust_guard.py
 
 [![Explore](https://img.shields.io/badge/Explore-Studionet-6366f1?style=for-the-badge)](https://genlayer-explorer.vercel.app)
 
-**Address:** `0x1fbAe8198a08152B86e4194778B02Ec5AA1E65e7`  
+**Address:** `0xBCdF5F6448C7DF90660Ea47447F26A0096D2d8E2`  
 **Chain:** Studionet (Genlayer Studio Network)  
 **Deployer:** `0x689759bb926E032EAfb1eE986eD7A98C1496ec1c`  
-**Tx:** `0x12975d11a19a66d91e2f5aabe3602816282c4c6c9c97313b199173eb81a59ebe`  
-**Status:** Deployed and E2E tested on studionet (register, submit_evidence, evaluate consensus, views). Duplicate registration correctly reverted.
+**Tx:** `0xa93422bd00d08cf1be5a1edd32dfc1b33c5719164237aca9c3e97139031a1f71`  
+**Status:** Deployed and E2E tested on studionet (register, submit_evidence, evaluate consensus, views). Duplicate registration correctly reverted. Steward fixes: evaluate stores profile address in trust_address (not evaluator), dispute enforces MAX_EVIDENCE_PER_USER limit.
 
 ---
 
