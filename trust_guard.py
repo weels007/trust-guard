@@ -562,10 +562,11 @@ class TrustGuard(gl.Contract):
             idx += 1
         result = _run_trust_consensus(addr_hex, evidence_items)
 
+        profile = self.profiles[addr_hex]
         ts = _now_ts()
         self.evaluations[ev_id] = TrustEvaluation(
             trust_id=ev_id,
-            trust_address=sender,
+            trust_address=profile.address,
             evaluator=sender,
             verdict=result["verdict"],
             score=result["score"],
@@ -614,6 +615,9 @@ class TrustGuard(gl.Contract):
             raise gl.vm.UserError("Signature does not match the disputing wallet")
 
         count = int(self.ev_counters.get(addr_hex, 0))
+        profile = self.profiles[addr_hex]
+        if profile.evidence_count >= MAX_EVIDENCE_PER_USER:
+            raise gl.vm.UserError("maximum evidence reached")
         ev_id = f"{addr_hex}:{count}"
         ts = _now_ts()
 
@@ -624,7 +628,6 @@ class TrustGuard(gl.Contract):
             description=description,
             submitted_ts=ts,
         )
-        profile = self.profiles[addr_hex]
         profile.evidence_count = profile.evidence_count + 1
         profile.status = "disputed"
         profile.updated_ts = ts
